@@ -110,7 +110,7 @@ func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, te
 	if textProp.Color != nil {
 		c := textProp.Color
 		s.pdf.SetTextColor(c.Red, c.Green, c.Blue)
-		defer s.pdf.SetTextColor(255, 255, 255)
+		defer s.pdf.SetTextColor(0, 0, 0)
 	}
 	if textProp.Align == consts.Left {
 		s.pdf.Text(xColOffset+left, yColOffset+top, text)
