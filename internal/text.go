@@ -33,7 +33,6 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
 func (s *text) Add(text string, cell Cell, textProp props.Text) {
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
-
 	// duplicated
 	_, _, fontSize := s.font.GetFont()
 	fontHeight := fontSize / s.font.GetScaleFactor()
@@ -108,7 +107,11 @@ func (s *text) getLines(words []string, colWidth float64) []string {
 
 func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
 	left, top, _, _ := s.pdf.GetMargins()
-
+	if textProp.Color != nil {
+		c := textProp.Color
+		s.pdf.SetTextColor(c.Red, c.Green, c.Blue)
+		defer s.pdf.SetTextColor(255, 255, 255)
+	}
 	if textProp.Align == consts.Left {
 		s.pdf.Text(xColOffset+left, yColOffset+top, text)
 		return

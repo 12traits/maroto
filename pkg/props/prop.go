@@ -61,6 +61,8 @@ type Text struct {
 	Extrapolate bool
 	// VerticalPadding define an additional space between lines
 	VerticalPadding float64
+	// Color
+	Color *color.Color
 }
 
 // Font represents properties from a text
