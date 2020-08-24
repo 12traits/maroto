@@ -2,11 +2,12 @@ package pdf
 
 import (
 	"bytes"
-	"github.com/johnfercher/maroto/pkg/color"
 
-	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/12traits/maroto/pkg/color"
+
+	"github.com/12traits/maroto/internal"
+	"github.com/12traits/maroto/pkg/consts"
+	"github.com/12traits/maroto/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
 

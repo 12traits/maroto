@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/12traits/maroto/pkg/consts"
 	"github.com/jung-kurt/gofpdf"
 )
 
