@@ -77,13 +77,13 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 			hs := h
 			align := tableProp.Align
 			right, left := 0.0, 0.0
-			if i == 0 {
-				align = consts.Left
-				left = 4.0
-			}
+
 			if i == len(header)-1 {
 				align = consts.Right
 				right = 4.0
+			} else {
+				align = consts.Left
+				left = 4.0
 			}
 
 			s.pdf.Col(tableProp.HeaderProp.GridSizes[i], func() {
@@ -119,13 +119,12 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 				align := tableProp.Align
 				right, left := 0.0, 0.0
 
-				if i == 0 {
-					align = consts.Left
-					left = 4.0
-				}
 				if i == len(content)-1 {
 					align = consts.Right
 					right = 4.0
+				} else {
+					align = consts.Left
+					left = 4.0
 				}
 
 				s.pdf.Col(tableProp.ContentProp.GridSizes[i], func() {
