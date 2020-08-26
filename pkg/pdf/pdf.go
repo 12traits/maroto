@@ -478,6 +478,13 @@ func (s *PdfMaroto) drawLastFooter() {
 
 		if s.offsetY+s.footerHeight < pageHeight-bottom-top {
 			s.headerFooterContextActive = true
+			totalOffsetY := int(s.offsetY + s.footerHeight)
+			maxOffsetPage := int(pageHeight - bottom - top)
+
+			s.Row(float64(maxOffsetPage-totalOffsetY), func() {
+				s.ColSpace(12)
+			})
+
 			s.footerClosure()
 			s.headerFooterContextActive = false
 		}
