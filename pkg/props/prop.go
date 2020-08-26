@@ -84,6 +84,8 @@ type TableListContent struct {
 	// Style of the text, ex: consts.Normal, bold and etc
 	Style consts.Style
 	// Size of the text
+	Color *color.Color
+
 	Size float64
 	// GridSizes is the custom properties of the size of the grid
 	// the sum of the values cannot be greater than 12, if this
@@ -235,6 +237,7 @@ func (s *TableListContent) ToTextProp(align consts.Align, top float64, extrapola
 		Size:            s.Size,
 		Align:           align,
 		Top:             top,
+		Color:           s.Color,
 		Extrapolate:     extrapolate,
 		VerticalPadding: verticalPadding,
 	}
