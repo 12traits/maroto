@@ -355,9 +355,8 @@ func (s *PdfMaroto) Text(text string, prop ...props.Text) {
 	if textProp.Top > s.rowHeight {
 		textProp.Top = s.rowHeight
 	}
-
 	cell := internal.Cell{
-		X:      s.xColOffset,
+		X:      s.xColOffset + prop.Left - prop.Right,
 		Y:      s.offsetY + textProp.Top,
 		Width:  s.colWidth,
 		Height: 0,
