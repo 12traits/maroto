@@ -75,10 +75,23 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 	s.pdf.Row(headerHeight+1, func() {
 		for i, h := range header {
 			hs := h
+			align := tableProp.Align
+			right, left := 0.0, 0.0
+			if i == 0 {
+				align = consts.Left
+				left = 4.0
+			}
+			if i == len(header)-1 {
+				align = consts.Right
+				right = 4.0
+			}
 
 			s.pdf.Col(tableProp.HeaderProp.GridSizes[i], func() {
 				reason := hs
-				s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0, false, 0.0))
+				prop := tableProp.HeaderProp.ToTextProp(align, 0, false, 0.0)
+				prop.Left = left
+				prop.Right = right
+				s.pdf.Text(reason, prop)
 			})
 		}
 	})
@@ -88,6 +101,10 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 		s.pdf.ColSpace(0)
 	})
 
+	if tableProp.Line {
+		s.pdf.Line(1.0)
+	}
+
 	// Draw contents
 	for index, content := range contents {
 		contentHeight := s.calcLinesHeight(content, tableProp.ContentProp, tableProp.Align)
@@ -96,12 +113,26 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 			s.pdf.SetBackgroundColor(*tableProp.AlternatedBackground)
 		}
 
-		s.pdf.Row(contentHeight+1, func() {
+		s.pdf.Row(contentHeight+6, func() {
 			for i, c := range content {
 				cs := c
+				align := tableProp.Align
+				right, left := 0.0, 0.0
+
+				if i == 0 {
+					align = consts.Left
+					left = 4.0
+				}
+				if i == len(content)-1 {
+					align = consts.Right
+					right = 4.0
+				}
 
 				s.pdf.Col(tableProp.ContentProp.GridSizes[i], func() {
-					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, 0, false, 0.0))
+					prop := tableProp.ContentProp.ToTextProp(align, 2, false, 0.0)
+					prop.Left = left
+					prop.Right = right
+					s.pdf.Text(cs, prop)
 				})
 			}
 		})
@@ -109,10 +140,9 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 		if tableProp.AlternatedBackground != nil && index%2 == 0 {
 			s.pdf.SetBackgroundColor(color.NewWhite())
 		}
-
-		if tableProp.Line {
-			s.pdf.Line(1.0)
-		}
+	}
+	if tableProp.Line {
+		s.pdf.Line(1.0)
 	}
 }
 

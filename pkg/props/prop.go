@@ -46,6 +46,8 @@ type Rect struct {
 
 // Text represents properties from a Text inside a cell
 type Text struct {
+	Left  float64
+	Right float64
 	// Top is space between the upper cell limit to the barcode, if align is not center
 	Top float64
 	// Family of the text, ex: consts.Arial, helvetica and etc
